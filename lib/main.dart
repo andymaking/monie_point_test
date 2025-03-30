@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:monie_point_test/data/di/locator.dart';
+import 'package:monie_point_test/utils/constants.dart';
+import 'package:monie_point_test/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 import 'app_theme/app_theme.dart';
 import 'app_theme/theme.service.dart';
 import 'data/services/navigation_service.dart';
+import 'screens/splash/splash.ui.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,8 +52,8 @@ class MyApp extends StatelessWidget {
                 builder: (BuildContext context, Widget? child) {
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
-                    navigatorKey: NavigationService.navigatorKey,
-                    scaffoldMessengerKey: NavigationService.snackBarKey,
+                    navigatorKey: navigationService.navigatorKey,
+                    scaffoldMessengerKey: navigationService.snackBarKey,
                     title: "MonieTest",
                     theme: AppTheme.themeData(false),
                     darkTheme: AppTheme.themeData(true),
@@ -62,15 +65,5 @@ class MyApp extends StatelessWidget {
             }
         )
     );
-  }
-}
-
-
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
   }
 }

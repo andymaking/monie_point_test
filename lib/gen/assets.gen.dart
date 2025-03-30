@@ -10,6 +10,9 @@
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/building-svgrepo-com.svg
+  String get buildingSvgrepoCom => 'assets/svg/building-svgrepo-com.svg';
+
   /// File path: assets/svg/filter-rectangle-svgrepo-com.svg
   String get filterRectangleSvgrepoCom =>
       'assets/svg/filter-rectangle-svgrepo-com.svg';
@@ -34,6 +37,7 @@ class $AssetsSvgGen {
 
   /// List of all assets
   List<String> get values => [
+    buildingSvgrepoCom,
     filterRectangleSvgrepoCom,
     heartSvgrepoCom,
     homeSvgrepoCom,
