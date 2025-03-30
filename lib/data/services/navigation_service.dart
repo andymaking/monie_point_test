@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class NavigationService {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static final GlobalKey<ScaffoldMessengerState> snackBarKey = GlobalKey<ScaffoldMessengerState>();
-  static BuildContext get context => navigatorKey.currentState!.context;
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final GlobalKey<ScaffoldMessengerState> snackBarKey = GlobalKey<ScaffoldMessengerState>();
+  BuildContext get context => navigatorKey.currentState!.context;
 
   // Navigate to a named route with an optional argument
   Future<dynamic>? navigateTo(String routeName, {dynamic argument}) {
