@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import '../../app_theme/theme.service.dart';
 import '../../screens/base/base-vm.dart';
 import '../../screens/home/bottom_nav.vm.dart';
+import '../../screens/home/home_screen/homescreen.vm.dart';
 import '../../utils/app_strings.dart';
 import '../services/navigation_service.dart';
 import '../services/storage_service.dart';
@@ -26,4 +27,5 @@ registerViewModel(){
   /* TODO Setup viewModels*/
   locator.registerFactory<BaseViewModel>(() => BaseViewModel());
   locator.registerFactory<BottomNavigationViewModel>(() => BottomNavigationViewModel());
+  locator.registerFactory<HomeScreenViewModel>(() => HomeScreenViewModel());
 }
