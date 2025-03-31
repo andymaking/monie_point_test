@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../gen/assets.gen.dart';
 import '../../widget/animation_spalsh.dart';
 import '../base/base-vm.dart';
+import 'home_screen/homescreen.ui.dart';
 
 class BottomNavigationViewModel extends BaseViewModel {
 
@@ -42,11 +43,9 @@ class BottomNavigationViewModel extends BaseViewModel {
       backgroundColor: Colors.red,
     ),Scaffold(
       backgroundColor: Colors.grey,
-    ),Scaffold(
-      body: Center(
-        child: ZoomInAnimation(),
-      ),
-    ),Scaffold(
+    ),
+    HomeScreenView(),
+    Scaffold(
       backgroundColor: Colors.blueAccent,
     ),Scaffold(
       backgroundColor: Colors.blueGrey,

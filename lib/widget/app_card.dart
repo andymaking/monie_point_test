@@ -58,10 +58,10 @@ class AppCard extends StatelessWidget {
         borderRadius: borderRadius??  BorderRadius.circular(radius != null? (radius! - 0.5.r)  : 8.r),
         boxShadow: useShadow != true ? null : [
           BoxShadow(
-              color: Theme.of(context).shadowColor,
-              blurRadius: blurRadius ?? 4,
+              color: Theme.of(context).shadowColor.withValues(alpha: 0.2),
+              blurRadius: blurRadius ?? 1,
               blurStyle: BlurStyle.normal,
-              offset: const Offset(0, 4),
+              offset: const Offset(0, 1),
               spreadRadius: spreadRadius ?? 0),
         ],
       ),
@@ -70,7 +70,7 @@ class AppCard extends StatelessWidget {
         child: Container(
           alignment: alignment,
           decoration: decoration?? BoxDecoration(
-            color: backgroundImage != null? null: color?? (backgroundColor ?? (stateColor3(isAppDark(context)))),
+            color: backgroundImage != null? null: color?? (backgroundColor ?? (white(isAppDark(context)))),
             borderRadius: borderRadius??  BorderRadius.circular(radius ?? 9.r),
             image: backgroundImage==null? null:
                 (backgroundImage??"").startsWith("http")? DecorationImage(
