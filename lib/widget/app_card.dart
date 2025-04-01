@@ -19,6 +19,7 @@ class AppCard extends StatelessWidget {
   final BorderRadius? borderRadius;
   final double? heights;
   final EdgeInsetsGeometry? padding;
+  final BoxFit? fit;
   final AlignmentGeometry? alignment;
   final EdgeInsetsGeometry? margin;
   final Widget? child;
@@ -48,7 +49,7 @@ class AppCard extends StatelessWidget {
     this.borderRadius,
     this.color,
     this.splashColor, this.alignment,
-    this.backgroundImage,
+    this.backgroundImage, this.fit,
   });
 
   @override
@@ -75,7 +76,7 @@ class AppCard extends StatelessWidget {
             image: backgroundImage==null? null:
                 (backgroundImage??"").startsWith("http")? DecorationImage(
                     image: CachedNetworkImageProvider(backgroundImage!),
-                    fit: BoxFit.fill
+                    fit: fit?? BoxFit.fill
                 ):
             DecorationImage(
               image: AssetImage(backgroundImage!),

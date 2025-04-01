@@ -4,6 +4,13 @@ class ImageUrl {
   static const String homeImage3 = "https://res.cloudinary.com/dpxwaza71/image/upload/v1742466814/WhatsApp_Image_2025-03-20_at_11.31.33_AM_1_yasfew.jpg";
 }
 
+//final List<String> imageUrls = [
+//     "https://images.unsplash.com/photo-1600585154356-596af9009e82",
+//     "https://images.unsplash.com/photo-1580587771525-78b9dba3b914",
+//     "https://images.unsplash.com/photo-1616627984048-0c8f0f775735",
+//     "https://images.unsplash.com/photo-1598300056193-ec7c6c4e53bc",
+//   ];
+
 class AppString {
   static const String stPetersburg = "Saint Petersburg";
   static const String hiMarina = "Hi, Marina";

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:monie_point_test/app_theme/palette.dart';
@@ -32,35 +33,37 @@ class BottomNavigationScreen extends StatelessWidget {
                 bottom: true,
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 10.sp),
-                  child: IntrinsicHeight(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AppCard(
-                          expandable: true,
-                          radius: 100.sp,
-                          padding: 5.sp.padA,
-                          color: Color(0xFF2b2b2b),
-                          child: Column(
-                            children: [
-                              Row(
-                                spacing: 10.sp,
-                                children: List.generate(
-                                  model.navs.length,
-                                  (index){
-                                    return BottomNavView(
-                                      index: index,
-                                      currentIndex: model.index,
-                                      onTap: model.changeIndex,
-                                      navType: model.navs[index],
-                                    );
-                                  }
+                  child: SlideInUp(
+                    child: IntrinsicHeight(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppCard(
+                            expandable: true,
+                            radius: 100.sp,
+                            padding: 5.sp.padA,
+                            color: Color(0xFF2b2b2b),
+                            child: Column(
+                              children: [
+                                Row(
+                                  spacing: 10.sp,
+                                  children: List.generate(
+                                    model.navs.length,
+                                    (index){
+                                      return BottomNavView(
+                                        index: index,
+                                        currentIndex: model.index,
+                                        onTap: model.changeIndex,
+                                        navType: model.navs[index],
+                                      );
+                                    }
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
