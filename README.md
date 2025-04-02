@@ -31,7 +31,7 @@ Just click on the link below
 
 ![SPLASH SCREEN](https://github.com/andymaking/monie_point_test/blob/main/assets/png/shot0.png)
 ![LOCATION PERMISSION SCREEN](https://github.com/andymaking/monie_point_test/blob/main/assets/png/shot1.png)
-![HOME](https://github.com/andymaking/monie_point_test/blob/main/png/shot2.png)
+![HOME](https://github.com/andymaking/monie_point_test/blob/main/assets/png/shot2.png)
 ![LOCATION](https://github.com/andymaking/monie_point_test/blob/main/assets/png/shot3.png)
 
 ## DOWNLOAD THE APK
