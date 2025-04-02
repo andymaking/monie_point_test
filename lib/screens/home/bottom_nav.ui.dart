@@ -1,8 +1,10 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:monie_point_test/app_theme/palette.dart';
 
 import '../../utils/widget_extensions.dart';
+import '../../widget/animation_spalsh.dart';
 import '../../widget/app_card.dart';
 import '../../widget/svg_builder.dart';
 import '../base/base-ui.dart';
@@ -32,35 +34,37 @@ class BottomNavigationScreen extends StatelessWidget {
                 bottom: true,
                 child: Padding(
                   padding: EdgeInsets.only(bottom: 10.sp),
-                  child: IntrinsicHeight(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AppCard(
-                          expandable: true,
-                          radius: 100.sp,
-                          padding: 5.sp.padA,
-                          color: Color(0xFF2b2b2b),
-                          child: Column(
-                            children: [
-                              Row(
-                                spacing: 10.sp,
-                                children: List.generate(
-                                  model.navs.length,
-                                  (index){
-                                    return BottomNavView(
-                                      index: index,
-                                      currentIndex: model.index,
-                                      onTap: model.changeIndex,
-                                      navType: model.navs[index],
-                                    );
-                                  }
+                  child: SlideInUp(
+                    child: IntrinsicHeight(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppCard(
+                            expandable: true,
+                            radius: 100.sp,
+                            padding: 5.sp.padA,
+                            color: Color(0xFF2b2b2b),
+                            child: Column(
+                              children: [
+                                Row(
+                                  spacing: 10.sp,
+                                  children: List.generate(
+                                    model.navs.length,
+                                    (index){
+                                      return BottomNavView(
+                                        index: index,
+                                        currentIndex: model.index,
+                                        onTap: model.changeIndex,
+                                        navType: model.navs[index],
+                                      );
+                                    }
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -92,21 +96,26 @@ class BottomNavView extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: ()=> onTap(index),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
+        alignment: Alignment.center,
         children: [
+          if(index == currentIndex)
+          HoverAnimation()
+          else
           Container(
-            height: index == currentIndex? 55: 40.sp,
-            width: index == currentIndex? 55: 40.sp,
+            height: 40.sp,
+            width: 40.sp,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: index == currentIndex? primaryColor: Color(0xFF222220),
             ),
-            child: SvgBuilder(navType.activeIcon, color: Colors.white, size: 20.sp,),
-          )
-          ,
+          ),
+          SvgBuilder(
+            navType.activeIcon,
+            color: Colors.white,
+            size: 20.sp,
+          ),
         ],
       ),
     );

@@ -1,38 +1,14 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random _rnd = Random();
 const ext = 0;
-final formatCurrency =
-    NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
-
-//Formats the amount and returns a formatted amount
-String formatPrice(String amount) {
-  return formatCurrency.format(num.parse(amount)).toString();
-}
 
 String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
     length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
-extension StringCasingExtension on String {
-  String? camelCase() => toBeginningOfSentenceCase(this);
-
-  String toCapitalized() =>
-      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
-
-  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
-      .split(' ')
-      .map((str) => str.toCapitalized())
-      .join(' ');
-
-  String? trimToken() => contains(":") ? split(":")[1].trim() : this;
-
-  String? trimSpaces() => replaceAll(" ", "");
-}
 
 extension ImagePath on String {
   String get svg => 'assets/svg/$this.svg';
@@ -83,27 +59,6 @@ String formatPhoneNumber(String phoneNumber) {
   return "0$withoutCountryCode";
 }
 
-
-String formatNumber(double number, {int? decimalPlaces, bool? roundUp}) {
-  if (decimalPlaces != null && decimalPlaces < 0) {
-    throw ArgumentError("decimalPlaces cannot be negative");
-  }
-
-  if (decimalPlaces != null && decimalPlaces == 0) {
-    return roundUp != null && roundUp ? number.ceil().toString() : number.floor().toString();
-  }
-
-  final formatter = NumberFormat.decimalPattern();
-
-  if (decimalPlaces != null) {
-    formatter.minimumFractionDigits = decimalPlaces;
-    formatter.maximumFractionDigits = decimalPlaces;
-  }
-
-  return roundUp != null && roundUp
-      ? formatter.format(number)
-      : formatter.format(double.parse(number.toStringAsFixed(decimalPlaces ?? 0)));
-}
 
 class NumericTextFormatter extends TextInputFormatter {
   @override

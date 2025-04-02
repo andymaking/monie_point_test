@@ -94,3 +94,63 @@ class _ZoomInAnimationState extends State<ZoomInAnimation>
     );
   }
 }
+
+
+class HoverAnimation extends StatefulWidget {
+  const HoverAnimation({super.key});
+
+  @override
+  State<HoverAnimation> createState() => _HoverAnimationState();
+}
+
+class _HoverAnimationState extends State<HoverAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _firstItemAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2), // Total duration: 4 seconds
+      vsync: this,
+    );
+
+    // First item animation: 0.0 to 1.0 from 0.0 to 0.375 (1.5 seconds)
+    _firstItemAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.375, curve: Curves.bounceInOut),
+      ),
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _firstItemAnimation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _firstItemAnimation.value,
+          child: Container(
+            height: 55.sp,
+            width: 55.sp,
+            decoration: BoxDecoration(
+              color: primaryColor,
+              shape: BoxShape.circle
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

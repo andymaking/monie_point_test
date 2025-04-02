@@ -19,6 +19,7 @@ class AppCard extends StatelessWidget {
   final BorderRadius? borderRadius;
   final double? heights;
   final EdgeInsetsGeometry? padding;
+  final BoxFit? fit;
   final AlignmentGeometry? alignment;
   final EdgeInsetsGeometry? margin;
   final Widget? child;
@@ -48,7 +49,7 @@ class AppCard extends StatelessWidget {
     this.borderRadius,
     this.color,
     this.splashColor, this.alignment,
-    this.backgroundImage,
+    this.backgroundImage, this.fit,
   });
 
   @override
@@ -59,10 +60,10 @@ class AppCard extends StatelessWidget {
         boxShadow: useShadow != true ? null : [
           BoxShadow(
               color: Theme.of(context).shadowColor.withValues(alpha: 0.2),
-              blurRadius: blurRadius ?? 1,
+              blurRadius: blurRadius ?? 4,
               blurStyle: BlurStyle.normal,
-              offset: const Offset(0, 1),
-              spreadRadius: spreadRadius ?? 0),
+              offset: const Offset(0, 4),
+              spreadRadius: spreadRadius ?? 10),
         ],
       ),
       child: ClipRRect(
@@ -75,7 +76,7 @@ class AppCard extends StatelessWidget {
             image: backgroundImage==null? null:
                 (backgroundImage??"").startsWith("http")? DecorationImage(
                     image: CachedNetworkImageProvider(backgroundImage!),
-                    fit: BoxFit.fill
+                    fit: fit?? BoxFit.fill
                 ):
             DecorationImage(
               image: AssetImage(backgroundImage!),

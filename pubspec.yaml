@@ -43,8 +43,13 @@ dependencies:
   provider: ^6.1.4
   get_it: ^8.0.3
   flutter_spinkit: ^5.2.1
-  intl: ^0.20.2
   cached_network_image: ^3.4.1
+  intl: ^0.20.2
+  geolocator: ^13.0.4
+  dio: ^5.8.0+1
+  flutter_dotenv: ^5.2.1
+  location: ^8.0.0
+  oktoast: ^3.4.0
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +86,7 @@ flutter:
 
   assets:
     - assets/
+    - .env
     - assets/png/
     - assets/svg/
 
