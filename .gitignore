@@ -3,8 +3,10 @@
 *.log
 *.pyc
 *.swp
+*.env
 *.bashs
 .bashs
+.env
 .runner
 *.runner
 .DS_Store

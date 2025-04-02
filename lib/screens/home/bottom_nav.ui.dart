@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:monie_point_test/app_theme/palette.dart';
 
 import '../../utils/widget_extensions.dart';
+import '../../widget/animation_spalsh.dart';
 import '../../widget/app_card.dart';
 import '../../widget/svg_builder.dart';
 import '../base/base-ui.dart';
@@ -95,21 +96,26 @@ class BottomNavView extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: ()=> onTap(index),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
+        alignment: Alignment.center,
         children: [
+          if(index == currentIndex)
+          HoverAnimation()
+          else
           Container(
-            height: index == currentIndex? 55: 40.sp,
-            width: index == currentIndex? 55: 40.sp,
+            height: 40.sp,
+            width: 40.sp,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: index == currentIndex? primaryColor: Color(0xFF222220),
             ),
-            child: SvgBuilder(navType.activeIcon, color: Colors.white, size: 20.sp,),
-          )
-          ,
+          ),
+          SvgBuilder(
+            navType.activeIcon,
+            color: Colors.white,
+            size: 20.sp,
+          ),
         ],
       ),
     );

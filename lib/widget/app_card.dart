@@ -60,10 +60,10 @@ class AppCard extends StatelessWidget {
         boxShadow: useShadow != true ? null : [
           BoxShadow(
               color: Theme.of(context).shadowColor.withValues(alpha: 0.2),
-              blurRadius: blurRadius ?? 1,
+              blurRadius: blurRadius ?? 4,
               blurStyle: BlurStyle.normal,
-              offset: const Offset(0, 1),
-              spreadRadius: spreadRadius ?? 0),
+              offset: const Offset(0, 4),
+              spreadRadius: spreadRadius ?? 10),
         ],
       ),
       child: ClipRRect(

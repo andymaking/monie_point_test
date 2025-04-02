@@ -94,16 +94,16 @@ class AppTheme {
             color: stateColor10(isDark)
         ),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: stateColor6(isDark), width: 1.sp),
-            borderRadius: BorderRadius.circular(8.r)
+            borderSide: BorderSide(color: Colors.transparent, width: 1.sp),
+            borderRadius: BorderRadius.circular(50.r)
         ),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: 1.sp, color: gray6(isDark)),
-            borderRadius: BorderRadius.circular(8.r)
+            borderSide: BorderSide(width: 1.sp, color: Colors.transparent),
+            borderRadius: BorderRadius.circular(50.r)
         ),
         errorBorder:OutlineInputBorder(
-            borderSide: BorderSide(width: 1.sp, color:  red9(isDark)),
-            borderRadius: BorderRadius.circular(8.r)
+            borderSide: BorderSide(width: 1.sp, color:Colors.transparent),
+            borderRadius: BorderRadius.circular(50.r)
         ),
         errorStyle: TextStyle(
           color: red9(isDark),
@@ -112,11 +112,11 @@ class AppTheme {
         ),
         disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 1.sp, color:  Colors.transparent),
-            borderRadius: BorderRadius.circular(8.r)
+            borderRadius: BorderRadius.circular(50.r)
         ),
         focusedErrorBorder:OutlineInputBorder(
             borderSide: BorderSide(width: 1.sp, color:  red9(isDark)),
-            borderRadius: BorderRadius.circular(8.r)
+            borderRadius: BorderRadius.circular(50.r)
         ),
         filled: true,
         fillColor: Colors.transparent,

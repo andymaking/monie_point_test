@@ -1,8 +1,9 @@
+import 'dart:ui';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:monie_point_test/app_theme/palette.dart';
 import 'package:monie_point_test/data/models/temp_property_model.dart';
 import 'package:monie_point_test/utils/widget_extensions.dart';
@@ -13,6 +14,7 @@ import 'package:monie_point_test/widget/svg_builder.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../../utils/app_strings.dart';
+import '../../../widget/custom_image_widget.dart';
 import '../../base/base-ui.dart';
 import 'homescreen.vm.dart';
 
@@ -34,9 +36,10 @@ class _HomeScreenViewState extends State<HomeScreenView> with TickerProviderStat
         width: width(context),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [stateColor2(isAppDark(context)), primaryColor.withValues(alpha: 0.1), primaryColor],
+            colors: [whitePrimaryColor, primaryColor.withValues(alpha: 0.3)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
+            stops: [0.4, 1]
             // stops: [0.1, 0.3, 1]
           )
         ),
@@ -48,6 +51,7 @@ class _HomeScreenViewState extends State<HomeScreenView> with TickerProviderStat
               children: [
                 SlideInLeft(
                   child: AppCard(
+                    color: Colors.white,
                     padding:EdgeInsets.symmetric(horizontal: 10.sp, vertical: 6.sp),
                     expandable: true,
                     // useShadow: true,
@@ -76,7 +80,7 @@ class _HomeScreenViewState extends State<HomeScreenView> with TickerProviderStat
             padding: 0.sp.padA,
             children: [
               AnimatedBuilder(
-                animation: model.itemAnimations[0],
+                animation: model.animation1,
                 builder: (_, c){
                   return Padding(
                     padding: 16.sp.padH,
@@ -86,27 +90,33 @@ class _HomeScreenViewState extends State<HomeScreenView> with TickerProviderStat
                         25.sp.sbH,
 
                         Transform.translate(
-                          offset: Offset(0.0, (1.0 - model.itemAnimations[0].value) * 60),
-                          child: AppText(
-                            AppString.hiMarina,
-                            color: secondaryColor,
-                            weight: FontWeight.w500,
-                            size: 20.sp,
+                          offset: Offset(0.0, (1.0 - model.animation1.value) * 60),
+                          child: FadeTransition(
+                            opacity: model.animation2,
+                            child: AppText(
+                              AppString.hiMarina,
+                              color: secondaryColor,
+                              weight: FontWeight.w500,
+                              size: 20.sp,
+                            ),
                           ),
                         ),
                         Transform.translate(
-                          offset: Offset(0.0, (1.0 - model.itemAnimations[1].value) * 60),
-                          child: AppText(
-                            AppString.letsCreateYourPlace,
-                            weight: FontWeight.w500,
-                            size: 30.sp,
-                            color: stateColor12(isAppDark(context)),
-                            height: 1.2,
+                          offset: Offset(0.0, (1.0 - model.animation2.value) * 60),
+                          child: FadeTransition(
+                            opacity: model.animation2,
+                            child: AppText(
+                              AppString.letsCreateYourPlace,
+                              weight: FontWeight.w500,
+                              size: 30.sp,
+                              color: stateColor12(false),
+                              height: 1.2,
+                            ),
                           ),
                         ),
                         25.sp.sbH,
                         Transform.translate(
-                          offset: Offset(0.0, (1.0 - model.itemAnimations[2].value) * 60),
+                          offset: Offset(0.0, (1.0 - model.animation3.value) * 0),
                           child: Row(
                             spacing: 16.sp,
                             children: [
@@ -154,6 +164,7 @@ class _HomeScreenViewState extends State<HomeScreenView> with TickerProviderStat
                                         return AppCard(
                                           heights: width,
                                           padding: 20.sp.padA,
+                                          backgroundColor: lightPrimaryColor,
                                           child: Column(
                                             children: [
                                               AppText(
@@ -185,204 +196,33 @@ class _HomeScreenViewState extends State<HomeScreenView> with TickerProviderStat
                             ],
                           ),
                         ),
-                        10.sp.sbH,
+                        25.sp.sbH,
                       ],
                     ),
                   );
                 },
               ),
-              Transform.translate(
-                offset: Offset(-0.0, (1.0 - model.itemAnimations[5].value) * 60),
-                child: SlideInUp(
-                  child: AppCard(
-                    padding: 10.sp.padA,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.sp),
-                      topRight: Radius.circular(20.sp),
-                    ),
-                    child: CustomImageLayout(
-                      images: model.properties,
-                    ),
+              SlideInUp(
+                child: AppCard(
+                  backgroundColor: Colors.white,
+                  padding: EdgeInsets.only(
+                    top: 10.sp,
+                    left: 10.sp,
+                    right: 10.sp,
+                    bottom: 100.sp,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.sp),
+                    topRight: Radius.circular(20.sp),
+                  ),
+                  child: CustomImageLayout(
+                    images: model.properties,
                   ),
                 ),
               )
 
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-
-class CustomImageLayout extends StatelessWidget {
-  final List<TempProperty> images;
-
-  const CustomImageLayout({super.key, required this.images});
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = width(context) - (10.sp + 20.sp);
-
-    List<Widget> buildGroup(List<TempProperty> group) {
-      switch (group.length) {
-        case 1:
-          return [
-            Row(
-              children: [
-                CardView(
-                  height: screenWidth / 2,
-                  image: group[0].url,
-                  index: 0
-                ),
-              ],
-            ),
-            10.sp.sbH,
-          ];
-        case 2:
-          return [
-            Row(
-              spacing: 10.sp,
-              children: [
-                CardView(
-                  height: screenWidth / 2,
-                  image: group[0].url,
-                  index: 0
-                ),
-                CardView(
-                  height: screenWidth / 2,
-                  image: group[1].url,
-                  index: 1,
-                ),
-              ],
-            ),
-          ];
-        case 3:
-          return [
-            Row(
-              children: [
-                CardView(
-                  height: screenWidth / 2,
-                  image: group[0].url,
-                  index: 0
-                ),
-              ],
-            ),
-            10.sp.sbH,
-            Row(
-              spacing: 10.sp,
-              children: [
-                CardView(
-                  height: screenWidth / 2,
-                  image: group[1].url,
-                  index: 1
-                ),
-                CardView(
-                  height: screenWidth / 2,
-                  image: group[2].url,
-                  index: 2
-                ),
-              ],
-            ),
-          ];
-        case 4:
-          return [
-            Row(
-              children: [
-                CardView(
-                  height: screenWidth / 2,
-                  image: group[0].url,
-                  index: 0
-                ),
-              ],
-            ),
-            10.sp.sbH,
-            Row(
-              spacing: 10.sp,
-              children: [
-                CardView(
-                  height: screenWidth,
-                  image: group[1].url,
-                  index: 1,
-                ),
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    height: screenWidth,
-                    child: Column(
-                      spacing: 10.sp,
-                      children: [
-                        CardView(
-                          height: (screenWidth/2) - 5.sp,
-                          image: group[2].url,
-                          index: 2,
-                        ),
-                        CardView(
-                          height: (screenWidth/2) - 5.sp,
-                          image: group[3].url,
-                          index: 3,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ];
-        default:
-          return [];
-      }
-    }
-
-    List<Widget> buildAllGroups() {
-      List<Widget> allGroups = [];
-      for (int i = 0; i < images.length; i += 4) {
-        final group = images.sublist(
-            i, i + 4 > images.length ? images.length : i + 4);
-        allGroups.addAll(buildGroup(group));
-        if (i + 4 < images.length) {
-          allGroups.add(const SizedBox(height: 8)); // Spacing between groups
-        }
-      }
-      return allGroups;
-    }
-
-    return SingleChildScrollView(
-      child: Column(
-        children: buildAllGroups(),
-      ),
-    );
-  }
-}
-
-class CardView extends StatelessWidget {
-  const CardView({
-    super.key,
-    required this.height,
-    required this.image,
-    this.width,
-    required this.index,
-  });
-
-  final double? width;
-  final double height;
-  final String image;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: FadeInUp(
-        duration: Duration(milliseconds: 400),
-        delay: Duration(milliseconds: 100 * index), // stagger
-        child: AppCard(
-          widths: width,
-          heights: height,
-          fit: BoxFit.cover,
-          radius: 20.sp,
-          padding: 0.0.padA,
-          backgroundImage: image,
         ),
       ),
     );

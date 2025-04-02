@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
 import '../../gen/assets.gen.dart';
+import '../../utils/snack_message.dart';
 import '../../widget/animation_spalsh.dart';
 import '../base/base-vm.dart';
 import 'home_screen/homescreen.ui.dart';
+import 'locations/location.ui.dart';
 
 class BottomNavigationViewModel extends BaseViewModel {
-
 
   List<NavType> navs = [
     NavType(
@@ -39,9 +41,8 @@ class BottomNavigationViewModel extends BaseViewModel {
   }
 
   List<Widget> screens = [
+    LocationScreenView(),
     Scaffold(
-      backgroundColor: Colors.red,
-    ),Scaffold(
       backgroundColor: Colors.grey,
     ),
     HomeScreenView(),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:monie_point_test/data/di/locator.dart';
+import 'package:monie_point_test/data/services/location.service.dart';
 import 'package:monie_point_test/utils/constants.dart';
 import 'package:monie_point_test/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,7 @@ import 'screens/splash/splash.ui.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await dotenv.load(fileName: ".env");
   await GetStorage.init();
 
   SystemChrome.setPreferredOrientations(
@@ -30,6 +33,8 @@ Future<void> main() async {
   ));
 
   await setupLocator();
+
+  await locator<LocationViewModel>().getCurrentPosition();
 
   runApp(const MyApp());
 }
